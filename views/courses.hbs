@@ -1,0 +1,32 @@
+<h1>Courses</h1>
+
+{{#if courses.length}}
+    {{#each courses}}
+        <div class="row">
+            <div class="col s6 offset-s3" >
+                <div class="card" style="margin: 2rem auto; padding: 1rem;">
+                    <div class="card-image" >
+                        <img src="{{image}}" alt="{{title}}" style="width: 200px; height: auto; display: block; margin: 0 auto">
+                    </div>
+                    <div class="card-content" style="margin: 0 auto; display: block; text-align: center" >
+                        <span class="card-title" style="font-weight: 600; font-size: 36px;">{{title}}</span>
+                        <p class="price" style="font-weight: 600; margin: 1rem; font-size: 36px;">{{price}}</p>
+                        <a href="/courses/{{_id}}"
+                           class="waves-effect waves-light btn-small" target="_blank">
+                            <i class="material-icons" style="margin: 0 auto;" >Open course</i></a>
+                        <a href="/courses/{{_id}}/edit?allow=true"
+                           class="waves-effect waves-light btn-small">
+                            <i class="material-icons" style="margin: 0 auto;" >Edit course</i></a>
+                        <form action="/card/add" method="POST">
+                            <input type="hidden" name="id" value="{{_id}}">
+                            <button class="btn btn-primary" type="submit">Buy course</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+
+{{else}}
+    <p>There are no active courses</p>
+{{/if}}
