@@ -21,6 +21,7 @@
                             <form action="/card/add" method="POST">
                                 <input type="hidden" name="id" value="{{_id}}">
                                 <button class="btn btn-primary" type="submit">Buy course</button>
+                                <input type="hidden" name="_scrf" value="{{csrf}}">
                             </form>
                         {{/if}}
 

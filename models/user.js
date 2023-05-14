@@ -7,7 +7,14 @@ const userSchema = new Schema({
     },
     name: {
         type: String,
-        required: true
+        default: 'Unnamed user',
+        // required: true
+        minLength: 2
+    },
+    password: {
+        type: String,
+        required: true,
+        minLength: 6
     },
     cart: {
         items: [

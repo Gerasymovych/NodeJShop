@@ -30,6 +30,14 @@
     font-style: italic;
 }
 
+.alert {
+    border-radius: 10px;
+    text-align: center;
+    background: rgba(255, 0, 0, 0.5);
+    color: white;
+    padding: 1rem 1rem;
+}
+
 img {
     height: 200px;
     width: auto;

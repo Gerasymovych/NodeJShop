@@ -1,5 +1,6 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const flash = require('connect-flash')
 const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
 const session = require('express-session');
 const MongoStore = require('connect-mongodb-session')(session);
@@ -12,7 +13,6 @@ const authRoutes = require('./routes/auth');
 const path =require('path');
 const mongoose = require('mongoose');
 const handlebars = require("handlebars");
-const User = require('./models/user');
 const varMiddleware = require('./middleware/variables');
 const userMiddleware = require('./middleware/user');
 
@@ -47,6 +47,7 @@ app.use(session ({
     saveUninitialized: false,
     store: store,
 }));
+app.use(flash());
 app.use(varMiddleware);
 app.use(userMiddleware);
 app.use('/', homeRoutes);

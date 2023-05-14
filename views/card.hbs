@@ -26,6 +26,7 @@
 
         <form action="/orders" method="post">
             <button type="submit" class="btn">Make order</button>
+            <input type="hidden" name="_scrf" value="{{csrf}}">
         </form>
 
     {{else}}
