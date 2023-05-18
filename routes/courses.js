@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
     res.render('courses', {
         title: 'Courses',
         isCourses: true,
+        userId: req.user ? req.user._id.toString() : null,
         courses
     });
 });
@@ -21,6 +22,10 @@ router.get('/:id/edit', auth, async (req, res) => {
     }
 
     const course = await Course.findById(req.params.id).lean();
+
+    if (course.userId.toString() !== req.user._id.toString()) {
+        return res.redirect('/courses');
+    }
 
     res.render('course-edit', {
         title: `Edit ${course.title}`,

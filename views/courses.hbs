@@ -15,9 +15,13 @@
                            class="waves-effect waves-light btn-small" target="_blank">
                             <i class="material-icons" style="margin: 0 auto;" >Open course</i></a>
                         {{#if @root.isAuth}}
-                            <a href="/courses/{{_id}}/edit?allow=true"
-                               class="waves-effect waves-light btn-small">
-                                <i class="material-icons" style="margin: 0 auto;" >Edit course</i></a>
+
+                            {{#ifEquals userId._id @root.userId}}
+                                <a href="/courses/{{_id}}/edit?allow=true"
+                                   class="waves-effect waves-light btn-small">
+                                    <i class="material-icons" style="margin: 0 auto;" >Edit course</i></a>
+                            {{/ifEquals}}
+
                             <form action="/card/add" method="POST">
                                 <input type="hidden" name="id" value="{{_id}}">
                                 <button class="btn btn-primary" type="submit">Buy course</button>

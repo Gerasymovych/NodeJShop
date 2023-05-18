@@ -15,20 +15,24 @@ const mongoose = require('mongoose');
 const handlebars = require("handlebars");
 const varMiddleware = require('./middleware/variables');
 const userMiddleware = require('./middleware/user');
-
+const keys = require('./keys')
 const app = express();
 
-const password = 'R1d2I0uyMPil3x5s';
-const MONGODB_URI = `mongodb+srv://gerasymovych:${password}@cluster0.oqzfeho.mongodb.net/shop`;
+// const password = 'R1d2I0uyMPil3x5s';
+// const MONGODB_URI = `mongodb+srv://gerasymovych:${password}@cluster0.oqzfeho.mongodb.net/shop`;
+
+const helper = require('./utils/hbs-helpers');
+handlebars.registerHelper(helper);
 
 const hbs = exphbs.create({
     defaultLayout: 'main',
-    extname: 'hbs'
+    extname: 'hbs',
+    // helpers: require('./utils/hbs-helpers')
 });
 
 const store = MongoStore({
     collection: 'sessions',
-    uri: MONGODB_URI
+    uri: keys.MONGODB_URI
 });
 
 app.engine('hbs', exphbs.engine({
@@ -42,7 +46,7 @@ app.set('views', 'views');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({extended: true}));
 app.use(session ({
-    secret: 'some secret value',
+    secret: keys.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     store: store,
@@ -63,7 +67,7 @@ const PORT = process.env.PORT || 3000;
 
 async function start() {
     try {
-        await mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+        await mongoose.connect(keys.MONGODB_URI, { useNewUrlParser: true });
         app.listen(PORT, () => {
             console.log('server is running on port ' + PORT);
         })

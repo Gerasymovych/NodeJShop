@@ -26,6 +26,8 @@
 
             <button class="btn btn-primary">Sign In</button>
 
+            <p><a href="/auth/reset">Forget password?</a></p>
+
             <input type="hidden" name="_scrf" value="{{csrfToken}}">
         </form>
     </div>
@@ -37,7 +39,7 @@
         {{/if}}
 
         <h1>Create user</h1>
-        <form action="/auth/register" method="POST">
+        <form action="/auth/register" method="POST" novalidate>
             <div class="input-field">
                 <input id="remail" name="email" type="email" class="validate" required>
                 <label for="remail">Your email</label>
